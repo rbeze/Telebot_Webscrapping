@@ -2,6 +2,7 @@ import sys
 import time
 import telepot
 import json
+from op_webscraping import webscraping
 from telepot.loop import MessageLoop
 
 with open("tokens.json", "r") as f:
@@ -12,7 +13,7 @@ def handle(msg):
     print(content_type, chat_type, chat_id)
 
     if content_type == 'text':
-        bot.sendMessage(chat_id, 'ola')
+        bot.sendMessage(chat_id, webscraping())
 
 #TOKEN = sys.argv[1]  # get token from command-line
 
