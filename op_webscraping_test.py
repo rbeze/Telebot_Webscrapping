@@ -23,25 +23,14 @@ def webscraping():
     #pattern = re.compile("/episodios/")
     links = bs.find_all("a")
     endpoints = []
+    temporadas = {}
 
     for link in links:
+
         if "/episodios/t" in link["href"]:
-            endpoints.append(link["href"])
-    # Making sure once again we got the desired content, this time in 'endpoints'
-    #print(endpoints)
+            endpoints.append(base_url + link["href"])
 
-    temporadas = []
-    
     for title, endpoint in zip(titles, endpoints):
-        temporada = title
-        endpoint_url = base_url + endpoint
-        #print(temporada + ": " + endpoint_url)
-
-        if title != titles[-1]:
-            temporada = f"{temporada}: {endpoint_url}"
-        else:
-            temporada = f"{temporada}: {endpoint_url}"
-
-        temporadas.append(temporada)
+        temporadas[title] = endpoint
     
     return temporadas

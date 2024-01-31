@@ -2,8 +2,9 @@ import sys
 import time
 import telepot
 import json
-from op_webscraping import webscraping
+from op_webscraping_test import webscraping
 from telepot.loop import MessageLoop
+
 
 with open("tokens.json", "r") as f:
     TOKEN = json.load(f)["telegram_token"]
