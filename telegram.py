@@ -14,7 +14,8 @@ def handle(msg):
     print(content_type, chat_type, chat_id)
 
     if content_type == 'text':
-        bot.sendMessage(chat_id, webscraping())
+        for temporada, link in webscraping().items():
+            bot.sendMessage(chat_id, f"{temporada} {link}")
 
 #TOKEN = sys.argv[1]  # get token from command-line
 
