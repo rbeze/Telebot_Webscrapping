@@ -2,6 +2,7 @@ import sys
 import time
 import telepot
 import json
+import re
 from op_webscraping_test import webscraping
 from telepot.loop import MessageLoop
 
@@ -14,8 +15,15 @@ def handle(msg):
     print(content_type, chat_type, chat_id)
 
     if content_type == 'text':
-        for temporada, link in webscraping().items():
-            bot.sendMessage(chat_id, f"{temporada} {link}")
+        #for temporada, link in webscraping().items():
+            #bot.sendMessage(chat_id, f"{temporada} {link}")
+        padrao = r'"([^"]+)":' #"[^"]+":(?=)
+        #re.findall(padrao, web_scraping())
+        chaves = re.sub(r"'([^']+)':", r'**', str(webscraping()))
+        #print(type(chaves))
+
+        x = str(webscraping()).replace("{", "").replace("}", "").replace(",","\n").replace("'", "")
+        bot.sendMessage(chat_id, chaves)
 
 #TOKEN = sys.argv[1]  # get token from command-line
 
