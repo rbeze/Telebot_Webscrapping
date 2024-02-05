@@ -19,11 +19,20 @@ def handle(msg):
             #bot.sendMessage(chat_id, f"{temporada} {link}")
         padrao = r'"([^"]+)":' #"[^"]+":(?=)
         #re.findall(padrao, web_scraping())
-        chaves = re.sub(r"'([^']+)':", r'**', str(webscraping()))
+        seasons_dict = webscraping() 
+        # due to the immutable nature of dicts, we create a new dict for the text in bold
+        bold_dict = {}
+
+        for titulo, link in seasons_dict.items():
+            bold_title = f"<b>{titulo}</b>"
+            bold_dict[bold_title] = link
+        
+        temporadas = str(bold_dict)
+
         #print(type(chaves))
 
-        x = str(webscraping()).replace("{", "").replace("}", "").replace(",","\n").replace("'", "")
-        bot.sendMessage(chat_id, chaves)
+        formatted_dict = temporadas.replace("{", "").replace("}", "").replace(",","\n").replace("'", "")
+        bot.sendMessage(chat_id, formatted_dict, parse_mode='HTML')
 
 #TOKEN = sys.argv[1]  # get token from command-line
 
